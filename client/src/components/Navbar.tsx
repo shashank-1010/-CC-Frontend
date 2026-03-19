@@ -5,7 +5,12 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const user = JSON.parse(localStorage.getItem('cc_user') || 'null');
+ // ✅ Yeh daalo
+let user = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) user = JSON.parse(userStr);
+} catch (e) {}
 
   const logout = () => {
     localStorage.removeItem('cc_token');
