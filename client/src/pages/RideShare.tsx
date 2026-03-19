@@ -20,15 +20,17 @@ export default function RideShare() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ from: '', to: '', rideTime: '', seats: '', status: 'active' });
   const [editRide, setEditRide] = useState<Ride | null>(null);
-  // Top of file - replace existing user parsing
-let user = null;
+
+  let user = null;
 try {
   const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
+  if (userStr) {
+    user = JSON.parse(userStr);
+  }
 } catch (e) {
   console.log('Error parsing user in RideShare');
+  localStorage.removeItem('cc_user');
 }
-
   const load = async () => {
     try {
       const { data } = await api.get('/rides');
