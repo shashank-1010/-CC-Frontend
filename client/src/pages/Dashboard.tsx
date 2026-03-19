@@ -4,6 +4,15 @@ import DashboardLayout from '../components/DashboardLayout';
 import StatCard from '../components/StatCard';
 import api from '../api/api';
 
+console.log('🔴 Dashboard component loading...');  // ✅ ADD THIS
+console.log('🔴 API object:', api);                // ✅ ADD THIS
+
+export default function Dashboard() {
+  console.log('🔴 Dashboard function called');      // ✅ ADD THIS
+  
+  const user = JSON.parse(localStorage.getItem('cc_user') || 'null');
+  console.log('🔴 User from localStorage:', user);  // ✅ ADD THIS
+
 interface Stats {
   marketplace: number;
   notes: number;
