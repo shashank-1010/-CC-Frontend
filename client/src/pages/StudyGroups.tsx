@@ -68,14 +68,16 @@ export default function StudyGroups() {
   const [filterSubject, setFilterSubject] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   
-  // Top of file - replace existing user parsing
-let user = null;
-try {
-  const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
-} catch (e) {
-  console.log('Error parsing user in StudyGroups');
-}
+  let user = null;
+  try {
+    const userStr = localStorage.getItem('cc_user');
+    if (userStr) {
+      user = JSON.parse(userStr);
+    }
+  } catch (e) {
+    console.log('Error parsing user in StudyGroups');
+    localStorage.removeItem('cc_user');
+  }
 
   const showToast = (message: string, type: 'success' | 'error' | 'info') => {
     setToast({ message, type });
