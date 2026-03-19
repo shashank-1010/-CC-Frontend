@@ -5,12 +5,15 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
- // ✅ Yeh daalo
-let user = null;
-try {
-  const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
-} catch (e) {}
+  
+   // Component ke top par yeh daalo
+  let user = null;
+  try {
+    const userStr = localStorage.getItem('cc_user');
+    if (userStr) user = JSON.parse(userStr);
+  } catch (e) {
+    console.log('Error parsing user in Navbar');
+  }
 
   const logout = () => {
     localStorage.removeItem('cc_token');
