@@ -154,7 +154,7 @@ export default function Polls() {
   
   const chatEndRef = useRef<HTMLDivElement>(null);
   
-  /let user = null;
+  let user = null;
 try {
   const userStr = localStorage.getItem('cc_user');
   if (userStr) {
