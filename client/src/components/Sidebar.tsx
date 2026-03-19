@@ -122,7 +122,14 @@ interface SidebarProps {
 export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('cc_user') || 'null');
+ // Top of file - replace existing user parsing
+let user = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) user = JSON.parse(userStr);
+} catch (e) {
+  console.log('Error parsing user in Sidebar');
+}
 
   const logout = () => {
     localStorage.removeItem('cc_token');
