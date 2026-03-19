@@ -322,7 +322,14 @@ export default function Marketplace() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [whatsappError, setWhatsappError] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("cc_user") || "null");
+ // Top of file - replace existing user parsing
+let user = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) user = JSON.parse(userStr);
+} catch (e) {
+  console.log('Error parsing user in Marketplace');
+}
 
   // Load items from API
   const load = async () => {
