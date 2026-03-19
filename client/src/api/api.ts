@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-// ✅ DIRECT BACKEND URL - /api MAT LAGAO
-const API_URL = 'https://v2-xnv2.onrender.com';
-
+// ✅ HARDCODE KARO - DIRECT BACKEND URL
 const api = axios.create({ 
-  baseURL: API_URL 
+  baseURL: 'https://v2-xnv2.onrender.com'  // /api MAT LAGANA
 });
 
 api.interceptors.request.use((config) => {
