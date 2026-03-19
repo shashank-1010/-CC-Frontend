@@ -104,13 +104,15 @@ export default function Activities() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [expandedParticipants, setExpandedParticipants] = useState<string | null>(null);
   
-  // Top of file - replace existing user parsing
-let user = null;
+  let user = null;
 try {
   const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
+  if (userStr) {
+    user = JSON.parse(userStr);
+  }
 } catch (e) {
   console.log('Error parsing user in Activities');
+  localStorage.removeItem('cc_user');
 }
 
   const showToast = (message: string, type: 'success' | 'error' | 'info') => {
