@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Render pe API_URL environment variable se aayega
-const API_URL = import.meta.env.VITE_API_URL || 'https://v2-xnv2.onrender.com/';
+// ✅ Direct backend URL - /api mat lagao
+const API_URL = 'https://v2-xnv2.onrender.com';
 
 const api = axios.create({ 
   baseURL: API_URL 
