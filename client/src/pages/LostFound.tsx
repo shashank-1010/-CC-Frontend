@@ -172,7 +172,14 @@ export default function LostFound() {
     status: 'open'
   });
 
-  const user = JSON.parse(localStorage.getItem('cc_user') || 'null');
+  // Top of file - replace existing user parsing
+let user = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) user = JSON.parse(userStr);
+} catch (e) {
+  console.log('Error parsing user in LostFound');
+}
   const isAdmin = user?.role === 'admin';
 
   const showToast = (message: string, type: 'success' | 'error' | 'info') => {
