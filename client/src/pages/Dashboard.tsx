@@ -4,8 +4,16 @@ import DashboardLayout from '../components/DashboardLayout';
 import StatCard from '../components/StatCard';
 import api from '../api/api';
 
-const userStr = localStorage.getItem('cc_user');
-const user = userStr ? JSON.parse(userStr) : null;
+// ✅ FIXED: Safe JSON parsing with try-catch
+let user = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) {
+    user = JSON.parse(userStr);
+  }
+} catch (e) {
+  console.log('Error parsing user data');
+}
 
 interface Stats {
   marketplace: number;
@@ -28,7 +36,6 @@ const quickLinks = [
 ];
 
 export default function Dashboard() {
-  const user = JSON.parse(localStorage.getItem('cc_user') || 'null');
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [recentItems, setRecentItems] = useState<any[]>([]);
@@ -115,7 +122,7 @@ export default function Dashboard() {
       title={`Good ${new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'}, ${user?.name?.split(' ')[0] || 'User'}`}
       subtitle="Here's what's happening on your campus today."
     >
-      {/* Stats Grid - Mobile first: 2 cols, Desktop: 8 cols */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 mb-6 sm:mb-8">
         {statCards.map((s) => (
           <StatCard 
@@ -128,7 +135,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Quick Access - Mobile first: 2 cols, Desktop: 7 cols */}
+      {/* Quick Access */}
       <div className="mb-8">
         <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3 px-1">
           Quick Access
@@ -152,9 +159,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Recent Activity & Profile - Stack on mobile, grid on desktop */}
+      {/* Recent Activity & Profile */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Activity Feed - Exactly as before, only design changed */}
+        {/* Recent Activity Feed */}
         <div className="lg:col-span-2 bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
           <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
             Recent Activity
@@ -192,7 +199,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Profile Card - Red & White theme */}
+        {/* Profile Card */}
         <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5">
           <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
             Your Profile
@@ -248,7 +255,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Announcement Banner - Red theme */}
+      {/* Announcement Banner */}
       <div className="mt-6 bg-red-600 rounded-xl p-4 sm:p-5 text-white">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
