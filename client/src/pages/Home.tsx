@@ -10,13 +10,15 @@ const features = [
 ];
 
 export default function Home() {
- // Top of file - replace existing user parsing
-let user = null;
+ let user = null;
 try {
   const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
+  if (userStr) {
+    user = JSON.parse(userStr);
+  }
 } catch (e) {
   console.log('Error parsing user in Home');
+  localStorage.removeItem('cc_user');
 }
   return (
     <div>
