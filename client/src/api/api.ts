@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-// ✅ HARDCODE KARO - DIRECT BACKEND URL
 const api = axios.create({ 
-  baseURL: 'https://v2-xnv2.onrender.com'  // /api MAT LAGANA
+  baseURL: 'https://v2-xnv2.onrender.com'
 });
 
 api.interceptors.request.use((config) => {
@@ -10,5 +9,14 @@ api.interceptors.request.use((config) => {
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+// ✅ ADD THIS - Response interceptor for error handling
+api.interceptors.response.use(
+  response => response,
+  error => {
+    console.log('API Error:', error.response?.status, error.config?.url);
+    return Promise.reject(error);
+  }
+);
 
 export default api;
