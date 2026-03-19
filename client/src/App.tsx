@@ -31,6 +31,7 @@ function isAdmin() {
     return user?.role === 'admin';
   } catch (e) {
     console.log('Error parsing user in isAdmin');
+    localStorage.removeItem('cc_user'); // Clean corrupt data
     return false;
   }
 }
