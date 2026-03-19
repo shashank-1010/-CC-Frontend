@@ -53,14 +53,16 @@ export default function Skills() {
   const [whatsappError, setWhatsappError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Top of file - replace existing user parsing
-let user = null;
-try {
-  const userStr = localStorage.getItem('cc_user');
-  if (userStr) user = JSON.parse(userStr);
-} catch (e) {
-  console.log('Error parsing user in Skills');
-}
+  let user = null;
+  try {
+    const userStr = localStorage.getItem('cc_user');
+    if (userStr) {
+      user = JSON.parse(userStr);
+    }
+  } catch (e) {
+    console.log('Error parsing user in Skills');
+    localStorage.removeItem('cc_user');
+  }
 
   // Load skills on mount and when filters change
   useEffect(() => {
