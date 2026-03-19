@@ -24,12 +24,13 @@ function isLoggedIn() {
 }
 
 function isAdmin() {
-  const userStr = localStorage.getItem('cc_user');
-  if (!userStr) return false;
   try {
+    const userStr = localStorage.getItem('cc_user');
+    if (!userStr) return false;
     const user = JSON.parse(userStr);
     return user?.role === 'admin';
-  } catch {
+  } catch (e) {
+    console.log('Error parsing user in isAdmin');
     return false;
   }
 }
