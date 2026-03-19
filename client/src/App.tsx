@@ -53,24 +53,31 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
         <Route path="/signup" element={<PublicOnlyRoute><Signup /></PublicOnlyRoute>} />
-        <Route path="/complaints" element={<PrivateRoute><Complaints /></PrivateRoute>} />
-        <Route path="/admin/complaints" element={<AdminRoute><ComplaintsManagement /></AdminRoute>} />
+
+        {/* Protected routes */}
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/marketplace" element={<PrivateRoute><Marketplace /></PrivateRoute>} />
         <Route path="/notes" element={<PrivateRoute><Notes /></PrivateRoute>} />
         <Route path="/rides" element={<PrivateRoute><RideShare /></PrivateRoute>} />
         <Route path="/studygroups" element={<PrivateRoute><StudyGroups /></PrivateRoute>} />
         <Route path="/activities" element={<PrivateRoute><Activities /></PrivateRoute>} />
-        <Route path="/skills" element={<Skills />} />
         <Route path="/polls" element={<PrivateRoute><Polls /></PrivateRoute>} />
         <Route path="/lost-found" element={<PrivateRoute><LostFound /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/skills" element={<PrivateRoute><Skills /></PrivateRoute>} />
+        <Route path="/complaints" element={<PrivateRoute><Complaints /></PrivateRoute>} />
+
+        {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/users" element={<AdminRoute><UsersManagement /></AdminRoute>} />
         <Route path="/admin/moderation" element={<AdminRoute><ContentModeration /></AdminRoute>} />
         <Route path="/admin/logs" element={<AdminRoute><AdminLogs /></AdminRoute>} />
+        <Route path="/admin/complaints" element={<AdminRoute><ComplaintsManagement /></AdminRoute>} />
+
+        {/* 404 Redirect - Yeh sabse IMPORTANT hai */}
         <Route path="*" element={<Navigate to={isLoggedIn() ? '/dashboard' : '/login'} replace />} />
       </Routes>
     </BrowserRouter>
