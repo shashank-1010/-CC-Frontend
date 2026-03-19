@@ -658,13 +658,20 @@ export default function Profile() {
   const [showComplaintModal, setShowComplaintModal] = useState(false);
 
   useEffect(() => {
-    // Get user from localStorage
-   // ✅ ISME KARDO
+   // Replace this line:
+const userData = JSON.parse(localStorage.getItem('cc_user') || 'null');
+
+// With this:
 let userData = null;
 try {
   const userStr = localStorage.getItem('cc_user');
-  if (userStr) userData = JSON.parse(userStr);
-} catch (e) {}
+  if (userStr) {
+    userData = JSON.parse(userStr);
+  }
+} catch (e) {
+  console.log('Error parsing user in Profile');
+  localStorage.removeItem('cc_user');
+}
     setUser(userData);
   }, []);
 
