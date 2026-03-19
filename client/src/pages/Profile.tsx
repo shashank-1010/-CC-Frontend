@@ -659,7 +659,12 @@ export default function Profile() {
 
   useEffect(() => {
     // Get user from localStorage
-    const userData = JSON.parse(localStorage.getItem('cc_user') || 'null');
+   // ✅ ISME KARDO
+let userData = null;
+try {
+  const userStr = localStorage.getItem('cc_user');
+  if (userStr) userData = JSON.parse(userStr);
+} catch (e) {}
     setUser(userData);
   }, []);
 
