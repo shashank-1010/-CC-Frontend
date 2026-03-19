@@ -659,8 +659,6 @@ export default function Profile() {
 
   useEffect(() => {
    // Replace this line:
-const userData = JSON.parse(localStorage.getItem('cc_user') || 'null');
-
 // With this:
 let userData = null;
 try {
@@ -672,6 +670,8 @@ try {
   console.log('Error parsing user in Profile');
   localStorage.removeItem('cc_user');
 }
+
+
     setUser(userData);
   }, []);
 
