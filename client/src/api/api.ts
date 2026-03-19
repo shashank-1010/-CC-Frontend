@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// ✅ DIRECT BACKEND URL - /api mat lagao
+// ✅ DIRECT BACKEND URL - /api MAT LAGAO
 const API_URL = 'https://v2-xnv2.onrender.com';
 
 const api = axios.create({ 
