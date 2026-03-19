@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const marketplaceController_1 = require("../controllers/marketplaceController");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const router = (0, express_1.Router)();
+router.get('/', marketplaceController_1.getItems);
+router.post('/', authMiddleware_1.protect, marketplaceController_1.createItem);
+router.get('/:id', marketplaceController_1.getItem);
+router.put('/:id', authMiddleware_1.protect, marketplaceController_1.updateItem);
+router.delete('/:id', authMiddleware_1.protect, marketplaceController_1.deleteItem);
+exports.default = router;
