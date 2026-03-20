@@ -1,24 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  
-   let user = null;
-try {
-  const userStr = localStorage.getItem('cc_user');
-  if (userStr) {
-    user = JSON.parse(userStr);
-  }
-} catch (e) {
-  console.log('Error parsing user in Navbar');
-  localStorage.removeItem('cc_user');
-}
+  const [user, setUser] = useState<any>(null);
+
+  // ✅ HAR RENDER PE LOCALSTORAGE SE READ KARNE KI JAGAH – STATE USE KAR
+  useEffect(() => {
+    const getUser = () => {
+      try {
+        const userStr = localStorage.getItem('cc_user');
+        if (userStr) {
+          setUser(JSON.parse(userStr));
+        } else {
+          setUser(null);
+        }
+      } catch (e) {
+        console.log('Error parsing user in Navbar');
+        localStorage.removeItem('cc_user');
+        setUser(null);
+      }
+    };
+
+    getUser();
+
+    // ✅ STORAGE CHANGE SUN – TAB CHANGE YA LOGIN KE BAAD UPDATE HO
+    window.addEventListener('storage', getUser);
+    return () => window.removeEventListener('storage', getUser);
+  }, []);
+
   const logout = () => {
     localStorage.removeItem('cc_token');
     localStorage.removeItem('cc_user');
+    setUser(null);  // ✅ STATE UPDATE
     navigate('/login');
   };
 
