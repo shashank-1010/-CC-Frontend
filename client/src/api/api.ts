@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// ✅ YEH SAHI HONA CHAHIYE (backend URL)
-const API_URL = 'https://backend-sk53.onrender.com';
+// ✅ Pehle environment variable se try karo, nahi to hardcoded URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://backend-sk53.onrender.com';
 
 const api = axios.create({ 
   baseURL: API_URL 
