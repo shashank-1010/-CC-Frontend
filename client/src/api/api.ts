@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // ✅ YEH SAHI HONA CHAHIYE (backend URL)
-const API_URL = 'https://v2-xnv2.onrender.com';  // tumhara backend URL
+const API_URL = 'https://backend-sk53.onrender.com';
 
 const api = axios.create({ 
   baseURL: API_URL 
