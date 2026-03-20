@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 interface NavItem {
@@ -122,32 +122,21 @@ interface SidebarProps {
 export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-
-  // ✅ FIX: State update on localStorage change
-  useEffect(() => {
-    const updateUser = () => {
-      try {
-        const userStr = localStorage.getItem('cc_user');
-        setUser(userStr ? JSON.parse(userStr) : null);
-      } catch (e) {
-        console.log('Error parsing user in Sidebar');
-        localStorage.removeItem('cc_user');
-        setUser(null);
-      }
-    };
-
-    updateUser();
-
-    // Listen for storage changes (login/logout in other tabs)
-    window.addEventListener('storage', updateUser);
-    return () => window.removeEventListener('storage', updateUser);
-  }, []);
+  
+   let user = null;
+  try {
+    const userStr = localStorage.getItem('cc_user');
+    if (userStr) {
+      user = JSON.parse(userStr);
+    }
+  } catch (e) {
+    console.log('Error parsing user in Sidebar');
+    localStorage.removeItem('cc_user');
+  }
 
   const logout = () => {
     localStorage.removeItem('cc_token');
     localStorage.removeItem('cc_user');
-    setUser(null);
     navigate('/login');
   };
 
