@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'https://backend-sk53.onrender.com/api';  // ✅ नया URL + /api
-
-const api = axios.create({ baseURL: API_URL });
+// ✅ DIRECT HARDCORE – कोई environment नहीं, कोई variable नहीं
+const api = axios.create({ 
+  baseURL: 'https://backend-sk53.onrender.com/api'   // ← यही final hai
+});
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('cc_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
+  console.log('🌐 Final URL:', config.baseURL + config.url);
   return config;
 });
 
