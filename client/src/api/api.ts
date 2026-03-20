@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://campus-connect-backend-final.onrender.com/api';  // ✅ नया URL + /api
+const API_URL = 'https://backend-sk53.onrender.com/api';  // ✅ नया URL + /api
 
 const api = axios.create({ baseURL: API_URL });
 
