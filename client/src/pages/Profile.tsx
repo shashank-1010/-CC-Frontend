@@ -317,7 +317,6 @@ const EditProfileModal = ({
       const { data } = await api.put('/profile', payload);
       
       // ✅ FIX: Properly update localStorage with the returned user data
-      // The response might be { user: updatedUser } or directly updatedUser
       const updatedUser = data.user || data;
       localStorage.setItem('cc_user', JSON.stringify(updatedUser));
       
@@ -513,7 +512,6 @@ function getMeta(item: any, tab: Tab): string {
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • ${item.seats} seats`;
   }
   if (tab === 'studygroups') {
-    // ✅ FIX: Ensure members is an array and count correctly
     const members = Array.isArray(item.members) ? item.members : [];
     const memberCount = members.length;
     return `👥 ${memberCount}/${item.membersLimit || 0}`;
@@ -657,22 +655,28 @@ export default function Profile() {
   const [selectedComplaint, setSelectedComplaint] = useState<Complaint | null>(null);
   const [showComplaintModal, setShowComplaintModal] = useState(false);
 
+  // ✅ FIX: User state sync with localStorage
+  const loadUser = () => {
+    try {
+      const userStr = localStorage.getItem('cc_user');
+      if (userStr) {
+        setUser(JSON.parse(userStr));
+      } else {
+        setUser(null);
+      }
+    } catch (e) {
+      console.log('Error parsing user in Profile');
+      localStorage.removeItem('cc_user');
+      setUser(null);
+    }
+  };
+
   useEffect(() => {
-   // Replace this line:
-// With this:
-let userData = null;
-try {
-  const userStr = localStorage.getItem('cc_user');
-  if (userStr) {
-    userData = JSON.parse(userStr);
-  }
-} catch (e) {
-  console.log('Error parsing user in Profile');
-  localStorage.removeItem('cc_user');
-}
-
-
-    setUser(userData);
+    loadUser();
+    
+    // Listen for storage changes (login/logout in other tabs)
+    window.addEventListener('storage', loadUser);
+    return () => window.removeEventListener('storage', loadUser);
   }, []);
 
   const showToast = (message: string, type: 'success' | 'error' | 'info') => {
@@ -1156,7 +1160,6 @@ try {
   // ==================== FIXED getExtraInfo FUNCTION ====================
   const getExtraInfo = (item: any, tab: Tab, onViewAll?: (members: User[], title: string) => void): React.ReactNode => {
     if (tab === 'studygroups') {
-      // ✅ FIX: Ensure members is an array
       const members = Array.isArray(item.members) ? item.members : [];
       const creator = item.userId;
       const canRemove = canRemoveMember(item);
@@ -1217,7 +1220,6 @@ try {
                           <p className="text-[10px] text-slate-600 mt-0.5">📞 {formatPhoneNumber(member.phone)}</p>
                         )}
                       </div>
-                      {/* ✅ Remove button - Only for creator/admin and not for creator themselves */}
                       {canRemove && member._id !== user?._id && member._id !== creator?._id && (
                         <button
                           onClick={(e) => {
