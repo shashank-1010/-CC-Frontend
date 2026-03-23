@@ -53,10 +53,18 @@ export default function Signup() {
               <div className="h-14 w-14 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">CC</span>
               </div>
-              <div className="text-white">
-                <h1 className="text-lg font-bold">Campus Connect</h1>
-                <p className="text-white/80 text-sm">Community Platform</p>
-              </div>
+             <div className="flex justify-between text-white border-b border-white/20 pb-2">
+  <div>
+    <h1 className="text-xl font-bold tracking-wide">Campus Connect</h1>
+    <p className="text-white/70 text-sm">Community Platform</p>
+  </div>
+
+  <div className="flex flex-col justify-end">
+    <span className="text-xs text-white/60 mt-6">
+      By Shashank Pandey
+    </span>
+  </div>
+</div>
             </div>
             
             <div className="inline-flex items-center gap-3 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/20">
