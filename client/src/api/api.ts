@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // ✅ YAHI FINAL HAI – ISKE AAGE KUCH NAHI
 const api = axios.create({ 
-  baseURL: 'https://backend-sk53.onrender.com/api'
+  baseURL: 'https://campus-connect-backend-p4co.onrender.com/api'
 });
 
 api.interceptors.request.use((config) => {
