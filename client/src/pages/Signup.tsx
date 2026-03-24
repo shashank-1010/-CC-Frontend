@@ -132,7 +132,7 @@ export default function Signup() {
                   type="tel"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  placeholder="Phone Number (Optional)"
+                  placeholder="Phone Number (Must)"
                   className="w-full bg-black/50 border-2 border-white/30 text-white placeholder-white/60 h-12 text-base rounded-xl px-4 focus:border-white focus:ring-0 focus:outline-none transition-all"
                 />
               </div>
