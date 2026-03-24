@@ -486,7 +486,7 @@ export default function Skills() {
 
             {/* Stats */}
             <div className="text-sm text-slate-500 mb-6">
-              Posted {formatDistanceToNow(new Date(selectedSkill.createdAt), { addSuffix: true })} • {selectedSkill.views} views
+              Posted {formatDistanceToNow(new Date(selectedSkill.createdAt), { addSuffix: true })}
             </div>
 
             {/* Action Buttons */}
