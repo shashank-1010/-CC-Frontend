@@ -3,28 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Campus Connect</title>
-    
-    <!-- Google Fonts -->
+    <title>Campus Connect Official</title>
+
+    <!-- ✅ TAB LOGO (FAVICON) -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    
-    <!-- OneSignal Push Notifications -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "0813ab5d-38a7-443d-816a-5e51f25c236f",
-        });
-      });
-    </script>
-    
-    <!-- Build Assets (JS + CSS) -->
-    <script type="module" crossorigin src="/assets/index-z92MsX__.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-51p4jYcP.css">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        background-color: #0f172a;
+        padding: 10px 20px;
+        color: white;
+      }
+
+      .navbar img {
+        width: 35px;
+        margin-right: 10px;
+      }
+    </style>
   </head>
+
   <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <img src="/logo.png" />
+      <h2>Campus Connect</h2>
+    </div>
+
+    <!-- React App -->
     <div id="root"></div>
+
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
